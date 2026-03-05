@@ -5,13 +5,14 @@ public class Entrenador {
     private String clase;
     private int cedula;
 
-    private List<ClasesGrupales> listClaseGrupal;
+    private List<ClaseGrupal> listClaseGrupal;
 
     // Getters y Setters
-    public Entrenador(String nombre, String clase, int cedula) {
+    public Entrenador(String nombre, String clase, int cedula, List<ClaseGrupal> listClaseGrupal) {
         this.nombre = nombre;
         this.cedula = cedula;
         this.clase = clase;
+        this.listClaseGrupal=listClaseGrupal;
     }
 
     public String getNombre() {
@@ -38,11 +39,11 @@ public class Entrenador {
         this.cedula = cedula;
     }
 
-    public List<ClasesGrupales> getListClaseGrupal() {
+    public List<ClaseGrupal> getListClaseGrupal() {
         return listClaseGrupal;
     }
 
-    public void setListClaseGrupal(List<ClasesGrupales> listClaseGrupal) {
+    public void setListClaseGrupal(List<ClaseGrupal> listClaseGrupal) {
         this.listClaseGrupal = listClaseGrupal;
     }
 

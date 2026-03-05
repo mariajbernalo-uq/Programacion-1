@@ -9,10 +9,10 @@ public class Gimnasio {
     private List<Socio> listSocios;
     private List<Entrenador> listEntrenadores;
     private List<Membresia> listMembresias;
-    private List<ClasesGrupales> listClasesGrupales;
+    private List<ClaseGrupal> listClasesGrupales;
     private List<HistorialPagos> listHistorialPagos;
 
-    public Gimnasio(String nombre, List<HistorialPagos> listHistorialPagos, List<ClasesGrupales> listClasesGrupales, List<Membresia> listMembresias, List<Entrenador> listEntrenadores, List<Socio> listSocios, String ubicacion, int nit) {
+    public Gimnasio(String nombre, List<HistorialPagos> listHistorialPagos, List<ClaseGrupal> listClasesGrupales, List<Membresia> listMembresias, List<Entrenador> listEntrenadores, List<Socio> listSocios, String ubicacion, int nit) {
         this.nombre = nombre;
         this.listHistorialPagos = listHistorialPagos;
         this.listClasesGrupales = listClasesGrupales;
@@ -39,11 +39,11 @@ public class Gimnasio {
         this.listHistorialPagos = listHistorialPagos;
     }
 
-    public List<ClasesGrupales> getListClasesGrupales() {
+    public List<ClaseGrupal> getListClasesGrupales() {
         return listClasesGrupales;
     }
 
-    public void setListClasesGrupales(List<ClasesGrupales> listClasesGrupales) {
+    public void setListClasesGrupales(List<ClaseGrupal> listClasesGrupales) {
         this.listClasesGrupales = listClasesGrupales;
     }
 
@@ -130,27 +130,32 @@ public class Gimnasio {
             if(existeEntrenador){
                 respuesta= "El entrenador ya se encuentra en la base de datos";
             }else{
-                Entrenador nuevoEntrenador= new Entrenador(nombre, clase, cedula);
+                Entrenador nuevoEntrenador= new Entrenador(nombre, clase, cedula, listClasesGrupales);
                 respuesta= "El entrenador "+ nuevoEntrenador.getNombre() + "fue registrado en el gimnasio éxitosamente";
                 }
             }
         return respuesta;
         }
 
-    public String registrarClases (int cupoMax, String horario, String tipoClase){
+    public String registrarClases (int cupoMax, String horario, String tipoClase, Entrenador entrenador){
         String respuesta= "";
         boolean existeClase= false;
         for(ClaseGrupal cg: listClasesGrupales){
-            if(cg.getTipoClase()==tipoClase && cg.getHorario().equals(horario)){
+            if(cg.getTipoClase().equals(tipoClase) && cg.getHorario().equals(horario)){
                 existeClase=true;
             }
             if(existeClase){
                 respuesta= "La clase ya se encuentra programada";
             }else{
-                ClaseGrupal nuevaClase= new ClaseGrupal(cupoMax, horario, tipoClase);
-                respuesta= "La clase "+ nuevaClase.getNombre() + "fue programada correctamente para las "+ nuevaClase.getHorario();
+                ClaseGrupal nuevaClase= new ClaseGrupal(cupoMax, horario, tipoClase, entrenador);
+                respuesta= "La clase "+ nuevaClase.getTipoClase() + "fue programada correctamente para las "+ nuevaClase.getHorario();
             }
         }
         return respuesta;
     }
+
+
+
     }
+
+
