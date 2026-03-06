@@ -7,13 +7,14 @@ public class ClaseGrupal {
     private String tipoClase;
 
     private Entrenador theEntrenador;
-    private List<Socio> reservas= new ArrayList<>();
+    private List<Socio> listSocios;
 
-    public ClaseGrupal(String horario, String tipoClase, int cupoMax, Entrenador theEntrenador) {
+    public ClaseGrupal(String horario, String tipoClase, int cupoMax, Entrenador theEntrenador,  List<Socio> listSocios) {
         this.horario = horario;
         this.tipoClase = tipoClase;
         this.cupoMax = cupoMax;
         this.theEntrenador = theEntrenador;
+        this.listSocios = listSocios;
     }
     //-------- Getters y Setters --------//
 
@@ -49,20 +50,22 @@ public class ClaseGrupal {
         this.theEntrenador = theEntrenador;
     }
 
-    public Socio getTheSocio() {
-        return theSocio;
+    public List<Socio> getListSocios() {
+        return listSocios;
     }
 
-    public void setTheSocio(Socio theSocio) {
-        this.theSocio = theSocio;
+    public void setListSocios(List<Socio> listSocios) {
+        this.listSocios = listSocios;
     }
+
 
     /**
      * Método para verificar la cantidad de cupos disponibles
      * @return cantidad de cupos disponibles
      */
     public int cuposDisponibles(){
-        return cupoMax-reservas.size();
+        int cupos= cupoMax-listSocios.size();
+        return cupos;
     }
 
     /**
@@ -70,21 +73,21 @@ public class ClaseGrupal {
      * @param socio
      * @return respuesta de registro éxitoso o no éxitoso
      */
-    public String reservarClase (Socio socio){
-        String respuesta= "";
-        if(reservas.contains(socio)){
-            respuesta= "El socio ya se registró en la clase";
-            if(reservas.size()>cuposDisponibles()){
-                respuesta= "La clase ha alcanzado el cupo máximo y no se puede inscribir. Pruebe con otro curso";
+    public String reservarClase(Socio socio) {
+
+        if (listSocios.contains(socio)) {
+            return "El socio ya se registró en la clase";
         }
-        }else {
-            reservas.add(socio);
-            respuesta= "El socio " + socio + "se registró en la clase correctamente";
+
+        // cupo máximo: si ya hay cupoMax socios, no deja inscribir
+        if (listSocios.size() >= cupoMax) {
+            return "La clase ha alcanzado el cupo máximo y no se puede inscribir. Pruebe con otro curso";
+        }else{
+            listSocios.add(socio);
+            return "El socio " + socio.getNombre() + " se registró en la clase correctamente";
         }
-        return respuesta;
+
+
     }
 
-    public List<Socio> getReservas() {
-        return reservas;
-    }
 }

@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Entrenador {
@@ -8,11 +9,11 @@ public class Entrenador {
     private List<ClaseGrupal> listClaseGrupal;
 
     // Getters y Setters
-    public Entrenador(String nombre, String clase, int cedula, List<ClaseGrupal> listClaseGrupal) {
+    public Entrenador(String nombre, String clase, int cedula) {
         this.nombre = nombre;
         this.cedula = cedula;
         this.clase = clase;
-        this.listClaseGrupal=listClaseGrupal;
+        this.listClaseGrupal = new ArrayList<>();
     }
 
     public String getNombre() {
@@ -47,8 +48,4 @@ public class Entrenador {
         this.listClaseGrupal = listClaseGrupal;
     }
 
-    public ClaseGrupal consultarClasesEntenador{
-
-
-    }
 }

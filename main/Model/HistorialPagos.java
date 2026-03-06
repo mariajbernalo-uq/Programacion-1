@@ -20,4 +20,16 @@ public class HistorialPagos {
     public String getMetodoPago() {
         return metodoPago;
     }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    public void setMetodoPago(String metodoPago) {
+        this.metodoPago = metodoPago;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
 }
